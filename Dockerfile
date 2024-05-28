@@ -1,3 +1,1 @@
-FROM node:20.11.1-alpine3.19
-
-RUN apk add -U subversion
+FROM php:8.3.7-cli-alpine
