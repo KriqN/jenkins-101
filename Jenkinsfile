@@ -17,6 +17,7 @@ pipeline {
 
                 cp .env.sample .env
 
+                sed -i 's/DB_ENV="development"/DB_ENV="development"/g' .env
                 sed -i 's/development_host="db.host.name"/development_host="host.docker.internal"/g' .env
                 sed -i 's/development_name="db_name"/development_name="fastCRM_local"/g' .env
                 sed -i "s/development_user=\\"db_username\\"/development_user=\\"$DB_LOCAL_USR\\"/g" .env
