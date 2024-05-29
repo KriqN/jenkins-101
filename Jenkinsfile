@@ -15,10 +15,13 @@ pipeline {
                 echo "DB User is $DB_LOCAL_USR"
                 echo "DB Pass is $DB_LOCAL_PSW"
                 '''
-                writeFile file: '.env', text: 'test text \n new line \n development_user="$DB_LOCAL_USR" \n DB_USERNAME="\${\${DB_ENV}_user}"'
                 sh '''
-                cat .env
+                cat <<EOF >.env
+                DB_ENV="development"
+                development_user=$DB_LOCAL_USR
+                EOF
                 '''
+                sh 'cat .env'
             }
         }
     }
