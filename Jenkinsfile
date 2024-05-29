@@ -4,6 +4,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'php -v'
+                sh 'pwd'
+                sh 'ls -liah'
             }
         }
     }
