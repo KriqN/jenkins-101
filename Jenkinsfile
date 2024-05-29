@@ -18,6 +18,7 @@ pipeline {
                 writeFile file: '.env', text: 'test text
                 new line
 
+                development_user="$DB_LOCAL_USR"
                 DB_USERNAME="\${\${DB_ENV}_user}"'
                 sh '''
                 cat .env
