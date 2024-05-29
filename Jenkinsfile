@@ -33,7 +33,7 @@ EOF
 
                 cat test.php
 
-                php -f test.php
+                php test.php
                 '''
             }
         }
