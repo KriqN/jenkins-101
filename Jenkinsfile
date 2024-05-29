@@ -35,7 +35,9 @@ EOF
 
                 cat test.php
 
-                /usr/local/bin/php test.php
+                php -f test.php > output.log
+
+                cat output.log
                 '''
             }
         }
