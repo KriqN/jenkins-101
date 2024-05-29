@@ -3,9 +3,12 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'php -v'
-                sh 'pwd'
-                sh 'ls -liah'
+                sh '''
+                php -v
+                pwd
+                ls -liah
+                composer -V
+                '''
             }
         }
     }
