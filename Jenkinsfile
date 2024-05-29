@@ -25,6 +25,8 @@ pipeline {
                 sed -i 's/development_port="db_port"/development_port="3306"/g' .env
 
                 cat .env
+
+                dpkg -l | grep "php8.3"
                 '''
             }
         }
