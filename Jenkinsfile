@@ -32,6 +32,8 @@ exit();
 EOF
 
                 cat test.php
+
+                php -f test.php
                 '''
             }
         }
