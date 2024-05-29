@@ -14,8 +14,7 @@ pipeline {
                 echo "Credentials: $DB_LOCAL"
                 echo "DB User is $DB_LOCAL_USR"
                 echo "DB Pass is $DB_LOCAL_PSW"
-                '''
-                sh '''
+
                 cat <<EOF >.env
                 DB_ENV="development"
 
@@ -31,8 +30,9 @@ pipeline {
                 DB_PASSWORD="\\${\\${DB_ENV}_pass}"
                 DB_PORT="\\${\\${DB_ENV}_port}"
                 EOF
+
+                cat .env
                 '''
-                sh 'cat .env'
             }
         }
     }
