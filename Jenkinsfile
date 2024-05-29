@@ -27,8 +27,10 @@ pipeline {
                 cat .env
 
                 cat <<EOF >test.php
-echo "Hello!";
-exit();
+<?php
+    echo "Hello!";
+    exit();
+?>
 EOF
 
                 cat test.php
