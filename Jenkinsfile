@@ -26,7 +26,12 @@ pipeline {
 
                 cat .env
 
-                dpkg -l | grep "php8.3"
+                cat <<EOF >test.php
+echo "Hello!";
+exit();
+EOF
+
+                cat test.php
                 '''
             }
         }
