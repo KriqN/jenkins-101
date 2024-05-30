@@ -1,37 +1,38 @@
 pipeline {
     agent { dockerfile true }
     stages {
-        stage('Test') {
+        stage('Composer install') {
+            steps {
+               echo "Composer install..."
+            }
+        }
+        stage('Create .env') {
             environment {
-                DB_LOCAL = credentials('DB-LOCAL')
+                DB_CREDENTIALS = credentials('DB-JUKEBOX')
+                DB_HOST = credentials('DB-JUKEBOX-HOST')
+                DB_NAME = credentials('DB-JUKEBOX-NAME')
+                DB_PORT = credentials('DB-JUKEBOX-PORT')
             }
             steps {
-                sh '''
-                php -v
-                pwd
-                ls -liah
-                composer -V
-                echo "Credentials: $DB_LOCAL"
-                echo "DB User is $DB_LOCAL_USR"
-                echo "DB Pass is $DB_LOCAL_PSW"
-                '''
-
                 writeFile file: '.env', text:
-'''DB_ENV="development"
+'''DB_ENV="testing_remote"
 
-development_host="host.docker.internal"
-development_name="fastCRM_local"
-development_user=''' + env.DB_LOCAL_USR + '''
-development_pass=''' + env.DB_LOCAL_PSW + '''
-development_port="3306"
+testing_remote_host="''' + env.DB_HOST + '''"
+testing_remote_name="''' + env.DB_NAME + '''"
+testing_remote_user="''' + env.DB_CREDENTIALS_USR + '''"
+testing_remote_pass="''' + env.DB_CREDENTIALS_PSW + '''"
+testing_remote_port="''' + env.DB_PORT + '''"
 
 DB_HOSTNAME="${${DB_ENV}_host}"
 DB_DATABASE="${${DB_ENV}_name}"
 DB_USERNAME="${${DB_ENV}_user}"
 DB_PASSWORD="${${DB_ENV}_pass}"
 DB_PORT="${${DB_ENV}_port}"'''
-
-                sh 'cat .env'
+            }
+        }
+        stage('Fetch Google Ads Data') {
+            steps {
+                echo "Fetching Google Ads Data..."
             }
         }
     }
