@@ -28,6 +28,8 @@ DB_DATABASE="${${DB_ENV}_name}"
 DB_USERNAME="${${DB_ENV}_user}"
 DB_PASSWORD="${${DB_ENV}_pass}"
 DB_PORT="${${DB_ENV}_port}"'''
+
+                sh 'cat .env'
             }
         }
         stage('Fetch Google Ads Data') {
