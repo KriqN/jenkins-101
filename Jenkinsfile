@@ -15,29 +15,21 @@ pipeline {
                 echo "DB User is $DB_LOCAL_USR"
                 echo "DB Pass is $DB_LOCAL_PSW"
 
-                cp .env.sample .env
+writeFile file: '.env', text: '''DB_ENV="development"
 
-                sed -i 's/DB_ENV="development"/DB_ENV="development"/g' .env
-                sed -i 's/development_host="db.host.name"/development_host="host.docker.internal"/g' .env
-                sed -i 's/development_name="db_name"/development_name="fastCRM_local"/g' .env
-                sed -i "s/development_user=\\"db_username\\"/development_user=\\"$DB_LOCAL_USR\\"/g" .env
-                sed -i "s/development_pass=\\"db_password\\"/development_pass=\\"$DB_LOCAL_PSW\\"/g" .env
-                sed -i 's/development_port="db_port"/development_port="3306"/g' .env
+development_host="host.docker.internal"
+development_name="fastCRM_local"
+development_user=$DB_LOCAL_USR
+development_pass=$DB__LOCAL_PSW
+development_port="3306"
+
+DB_HOSTNAME="${${DB_ENV}_host}"
+DB_DATABASE="${${DB_ENV}_name}"
+DB_USERNAME="${${DB_ENV}_user}"
+DB_PASSWORD="${${DB_ENV}_pass}"
+DB_PORT="${${DB_ENV}_port}"'''
 
                 cat .env
-
-                cat <<EOF >test.php
-<?php
-    echo "Hello!";
-    exit();
-?>
-EOF
-
-                cat test.php
-
-                php -f test.php > output.log
-
-                cat output.log
                 '''
             }
         }
