@@ -21,8 +21,8 @@ DB_ENV="development"
 
 development_host="host.docker.internal"
 development_name="fastCRM_local"
-development_user=\$DB_LOCAL_USR
-development_pass=\$DB_LOCAL_PSW
+development_user=${DB_LOCAL_USR}
+development_pass=${DB_LOCAL_PSW}
 development_port="3306"
 
 DB_HOSTNAME="${${DB_ENV}_host}"
