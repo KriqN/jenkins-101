@@ -16,8 +16,8 @@ pipeline {
                 echo "DB Pass is $DB_LOCAL_PSW"
                 '''
 
-                writeFile file: '.env', text: '''
-DB_ENV="development"
+                writeFile file: '.env', text:
+'''DB_ENV="development"
 
 development_host="host.docker.internal"
 development_name="fastCRM_local"
@@ -29,8 +29,7 @@ DB_HOSTNAME="${${DB_ENV}_host}"
 DB_DATABASE="${${DB_ENV}_name}"
 DB_USERNAME="${${DB_ENV}_user}"
 DB_PASSWORD="${${DB_ENV}_pass}"
-DB_PORT="${${DB_ENV}_port}"
-'''
+DB_PORT="${${DB_ENV}_port}"'''
 
                 sh 'cat .env'
             }
